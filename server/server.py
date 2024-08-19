@@ -32,11 +32,13 @@ def get_examples():
     response = []
     with open(os.path.join(data_path, gqa_anno),"r") as f:
         anno = json.load(f)
-    for x in anno:
+    num = 5
+    for x in anno.values():
         item = {}
         imgs = []
+        # import pdb; pdb.set_trace()
         for y in x['image']:
-            with open(os.path.join(data_path, 'gqa', x), 'rb') as f:
+            with open(os.path.join(data_path, 'images/gqa', y), 'rb') as f:
                 img = f.read()
             base64_img = base64.b64encode(img).decode('utf-8')
             imgs.append(base64_img)
@@ -47,6 +49,9 @@ def get_examples():
         item['ja_queries'] = x['ja_queries']
         item['codes'] = x['codes']
         response.append(item)
+        num -= 1
+        if num == 0:
+            break
     return jsonify(response)
 
 
