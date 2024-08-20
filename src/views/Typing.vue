@@ -1,4 +1,4 @@
-   <template>
+<template>
     <div class="typing-container">
       <p class="typing-text">
         <span v-for="(char, index) in displayedText" :key="index">{{ char }}</span>
@@ -47,6 +47,7 @@
             } else {
               clearInterval(typingInterval);
               this.hideCursor();
+              this.notifyTypingComplete(); // 通知父组件打字完成
             }
           }, this.typingSpeed);
         }, this.thinkingTime);
@@ -56,6 +57,9 @@
           this.showCursor = false;
         }, 500);
       },
+      notifyTypingComplete() {
+        this.$emit('typingComplete');
+      }
     },
   };
   </script>
@@ -90,5 +94,4 @@
     }
   }
   </style>
-  
   
