@@ -48,6 +48,7 @@ def get_examples():
         item['ja_question'] = x['ja_question']
         item['ja_queries'] = x['ja_queries']
         item['codes'] = x['codes']
+        item['answer'] = x['answer']
         response.append(item)
         num -= 1
         if num == 0:

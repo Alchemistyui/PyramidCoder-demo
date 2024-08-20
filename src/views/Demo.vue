@@ -67,13 +67,13 @@
                             <h2 v-if="isJan">Code execution</h2>
                             <h2 v-else>コード実行</h2>
                             <img v-if="!showAnswer" src="@/assets/imgs/examples/loading.gif"
-                                style="width: 5%; margin: 0 auto;" />
+                                style="width: 3%; margin: 0 auto;" />
                             <!-- <p v-else>{{ item.answer }}</p> -->
                             <div v-else>
-                                <p v-if="isJan">Answer: aaaa</p>
-                                <p v-else>答え: aaaa</p>
-                                <p v-if="isJan">Correct Answer: aaaa</p>
-                                <p v-else>正解: aaaa</p>
+                                <p v-if="isJan">Answer: {{ item.answer }}</p>
+                                <p v-else>答え: {{ item.answer }}</p>
+                                <p v-if="isJan">Correct Answer: {{ item.answer }}</p>
+                                <p v-else>正解: {{ item.answer }}</p>
                                 
                             </div>
 
@@ -130,7 +130,7 @@ export default {
             // Delay for 2 seconds before showing the answer
             setTimeout(() => {
                 this.showAnswer = true;
-            }, 2000);
+            }, 3000);
         }
     },
     computed: {
