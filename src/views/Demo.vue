@@ -28,9 +28,15 @@
                         <img :src="'data:image/png;base64,' + image" class="example_image">
                     </div>
                     <div>
-                        <el-button type="text" @click="dialogVisible = true"><span>{{ item.question }}</span></el-button>
                         
-                        <el-dialog title="PyramidCoder Generation" v-model="dialogVisible">
+                        <p>{{ item.question }}</p>
+                        <p>(日本語: {{ item.ja_question }})</p>
+                        <el-button @click="item.dialogVisible = true">Try this</el-button>
+                        <!-- <el-button type="text" @click="item.dialogVisible = true"><p>{{ item.question }}</p>
+                            <br /><p>(日本語: {{ item.ja_question }})</p>
+                        </el-button> -->
+                    </div>
+                        <el-dialog title="PyramidCoder Generation" v-model="item.dialogVisible">
                             <!-- <el-button type="text" @click="showDialog(item.projectId)"><span>{{ item.question }}</span></el-button>
                         
                         <el-dialog :title="'PyramidCoder Generation - ' + item.projectId" :visible.sync="dialogVisible[item.projectId]"> -->
@@ -40,22 +46,19 @@
                             </div>
                             <h2>Input Question</h2>
                             <p>{{ item.question }}</p>
+                            <p>(日本語: {{ item.ja_question }})</p>
+
+                            <img class="card_img" src="@/assets/imgs/examples/pink_arrow.png" style="width: 5%; margin: 0 auto;" />
+
                             <h2>Question Rephrasing</h2>
-                            <p>{{ item.codes }}</p>
-                            <Typing :fullText="getRandomCode(item.codes)" :typingSpeed="100" :thinkingTime="500" />
+                            <Typing :fullText="getRandomCode(item.queries)" :typingSpeed="50" :thinkingTime="1000" />
+                            <h2>Code generation</h2>
+                            <Typing :fullText="getRandomCode(item.codes)" :typingSpeed="100" :thinkingTime="4000" />
                             <!-- <img class="card_img" src="@/assets/imgs/examples/loading.gif" style="width: 5%; margin: 0 auto;" /> -->
                         </el-dialog>
-                    </div>
                 </el-card>
             </el-col>
         </el-row>
-        <!-- 
-    <el-row :gutter="0">
-      <el-col :span="6"> -->
-
-
-        <!-- </el-col>
-    </el-row>   -->
     </main>
 
 </template>
@@ -64,63 +67,19 @@
 import axios from "axios";
 import Typing from './Typing.vue';
 import { API_BASE_URL } from '@/config.js';
-import { reactive, toRefs } from 'vue';
-// import { fa } from "element-plus/es/locale";
+// import { reactive, toRefs } from 'vue';
 
 export default {
     components: {
         Typing
     },
-//     setup() {
-//     // Initialize reactive state
-//     const state = reactive({
-//       dialogVisible: {}
-//     });
-
-//     // Method to show the dialog for the specific item
-//     function showDialog(projectId) {
-//       state.dialogVisible[projectId] = true;
-//     }
-
-//     // Method to close the dialog for the specific item
-//     function closeDialog(projectId) {
-//       state.dialogVisible[projectId] = false;
-//     }
-
-//     // Expose the state and methods to the template
-//     return {
-//       ...toRefs(state),
-//       showDialog,
-//       closeDialog
-//     };
-//   },
     data() {
         return {
-            // allprojects: [{ message: 'Foo' }, { message: 'Bar' }],
             examples: [],
-            // dialogVisible: false,
             dialogVisible: {}
         };
     },
     methods: {
-    //     showDialog(id) {
-    //   console.log(`Showing dialog for id: ${id}`);
-    //   console.log(this.dialogVisible);
-    //   this.dialogVisible[id] = true;
-    // },
-    // hideDialog(id) {
-    //   console.log(`Hiding dialog for id: ${id}`);
-    //   console.log(this.dialogVisible);
-    //   this.dialogVisible[id] = false;
-    // },
-    // Method to show the dialog for the specific item
-    // showDialog(projectId) {
-    //   this.$set(this.dialogVisible, projectId, true);
-    // },
-    // // Method to close the dialog for the specific item
-    // closeDialog(projectId) {
-    //   this.$set(this.dialogVisible, projectId, false);
-    // },
         getRandomCode(codes) {
             if (Array.isArray(codes) && codes.length > 0) {
                 const randomIndex = Math.floor(Math.random() * codes.length);
@@ -160,14 +119,7 @@ export default {
 </script>
 
 <style>
-/* .el-dialog__wrapper.dialog-fade-leave-active,
-.el-message-box__wrapper.msgbox-fade-leave-active {
-    transition: none;
-}
 
-.el-popup-parent--hidden {
-    transition: none;
-} */
 .el-card {
     type: 'flex';
     justify: 'center';
@@ -184,7 +136,6 @@ export default {
     object-fit: contain;
     padding: 0 5px;
 }
-
 
 
 .el-card__body {

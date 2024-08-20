@@ -1,7 +1,7 @@
 '''
 Author: Alchemist
 Date: 2023-04-12
-LastEditTime: 2024-08-19
+LastEditTime: 2024-08-20
 FilePath: /PyramidCoder-demo/server/server.py
 Description: 
 
@@ -44,7 +44,7 @@ def get_examples():
             imgs.append(base64_img)
         item['image'] = imgs
         item['question'] = x['question']
-        item['queries'] = x['queries']
+        item['queries'] = x['queries'].split('\n')
         item['ja_question'] = x['ja_question']
         item['ja_queries'] = x['ja_queries']
         item['codes'] = x['codes']
@@ -67,10 +67,11 @@ def get_examples():
             imgs.append(base64_img)
         item['image'] = imgs
         item['question'] = x['question']
-        item['queries'] = x['queries']
+        item['queries'] = x['queries'].split('\n')
         item['ja_question'] = x['ja_question']
         item['ja_queries'] = x['ja_queries']
         item['codes'] = x['codes']
+        item['dialogVisible']  = False
         response.append(item)
         num -= 1
         if num == 0:
