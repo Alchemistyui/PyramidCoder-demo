@@ -1,7 +1,7 @@
 <!--
  * @Author: Alchemistyui
  * @Date: 2023-07-12
- * @LastEditTime: 2024-08-19
+ * @LastEditTime: 2024-08-20
  * @FilePath: /PyramidCoder-demo/src/views/Demo.vue
  * @Description: 
  * 
@@ -10,32 +10,40 @@
 
 <template>
     <main class="card_view">
-        <el-button type="text" @click="dialogVisible = true">{{dialogVisible}}</el-button>
+        <!-- <el-button type="text" @click="dialogVisible = true">{{dialogVisible}}</el-button> -->
 
-<el-dialog
-  title="提示"
-  v-model="dialogVisible"
-  width="30%"
-  :before-close="handleClose">
-  <span>这是一段信息</span>
-  <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-  </span>
-</el-dialog>
+        <!-- <el-dialog title="提示" v-model="dialogVisible" width="30%" :before-close="handleClose">
+            <span>这是一段信息</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+            </span>
+        </el-dialog> -->
 
 
-        <el-row v-for="(page, index) of pages" :key="index">
-            <el-col :span="4" v-for="(item, innerindex) of page" :key="item.projectId" :offset="innerindex > 0 ? 2 : 1">
-                <el-card :body-style="{ padding: '0px' }">
-                    <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                        class="image">
-                    <div style="padding: 14px;">
-                        <el-button type="text" @click="dialogVisible = true"><span>{{ item.message
-                                }}</span></el-button>
-
-                        <el-dialog title="收货地址" v-model="dialogVisible">
-                            <span>这是一段信息</span>
+        <el-row v-for="(page, index) of pages" :key="index" type="flex" justify="center">
+            <el-col :span="6" v-for="(item, innerindex) of page" :key="item.projectId">
+                <el-card shadow="hover" class="example_card">
+                    <div v-for="(image, imageIndex) in item.image" :key="imageIndex" class="image-container">
+                        <img :src="'data:image/png;base64,' + image" class="example_image">
+                    </div>
+                    <div>
+                        <el-button type="text" @click="dialogVisible = true"><span>{{ item.question }}</span></el-button>
+                        
+                        <el-dialog title="PyramidCoder Generation" v-model="dialogVisible">
+                            <!-- <el-button type="text" @click="showDialog(item.projectId)"><span>{{ item.question }}</span></el-button>
+                        
+                        <el-dialog :title="'PyramidCoder Generation - ' + item.projectId" :visible.sync="dialogVisible[item.projectId]"> -->
+                            <h2>Input Image(s)</h2>
+                            <div v-for="(image, imageIndex) in item.image" :key="imageIndex" class="image-container">
+                                <img :src="'data:image/png;base64,' + image" class="example_image">
+                            </div>
+                            <h2>Input Question</h2>
+                            <p>{{ item.question }}</p>
+                            <h2>Question Rephrasing</h2>
+                            <p>{{ item.codes }}</p>
+                            <Typing :fullText="getRandomCode(item.codes)" :typingSpeed="100" :thinkingTime="500" />
+                            <!-- <img class="card_img" src="@/assets/imgs/examples/loading.gif" style="width: 5%; margin: 0 auto;" /> -->
                         </el-dialog>
                     </div>
                 </el-card>
@@ -53,26 +61,79 @@
 </template>
 
 <script>
+import axios from "axios";
+import Typing from './Typing.vue';
+import { API_BASE_URL } from '@/config.js';
+import { reactive, toRefs } from 'vue';
+// import { fa } from "element-plus/es/locale";
+
 export default {
+    components: {
+        Typing
+    },
+//     setup() {
+//     // Initialize reactive state
+//     const state = reactive({
+//       dialogVisible: {}
+//     });
+
+//     // Method to show the dialog for the specific item
+//     function showDialog(projectId) {
+//       state.dialogVisible[projectId] = true;
+//     }
+
+//     // Method to close the dialog for the specific item
+//     function closeDialog(projectId) {
+//       state.dialogVisible[projectId] = false;
+//     }
+
+//     // Expose the state and methods to the template
+//     return {
+//       ...toRefs(state),
+//       showDialog,
+//       closeDialog
+//     };
+//   },
     data() {
         return {
-            allprojects: [{ message: 'Foo' }, { message: 'Bar' }],
-            dialogVisible: false,
+            // allprojects: [{ message: 'Foo' }, { message: 'Bar' }],
+            examples: [],
+            // dialogVisible: false,
+            dialogVisible: {}
         };
     },
     methods: {
-      handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
-      }
+    //     showDialog(id) {
+    //   console.log(`Showing dialog for id: ${id}`);
+    //   console.log(this.dialogVisible);
+    //   this.dialogVisible[id] = true;
+    // },
+    // hideDialog(id) {
+    //   console.log(`Hiding dialog for id: ${id}`);
+    //   console.log(this.dialogVisible);
+    //   this.dialogVisible[id] = false;
+    // },
+    // Method to show the dialog for the specific item
+    // showDialog(projectId) {
+    //   this.$set(this.dialogVisible, projectId, true);
+    // },
+    // // Method to close the dialog for the specific item
+    // closeDialog(projectId) {
+    //   this.$set(this.dialogVisible, projectId, false);
+    // },
+        getRandomCode(codes) {
+            if (Array.isArray(codes) && codes.length > 0) {
+                const randomIndex = Math.floor(Math.random() * codes.length);
+                return codes[randomIndex];
+            } else {
+                return ''; // Return an empty string or a default value if the list is empty
+            }
+        },
     },
     computed: {
         pages() {
             const pages = []
-            this.allprojects.forEach((item, index) => {
+            this.examples.forEach((item, index) => {
                 const page = Math.floor(index / 4)//One line has four items
                 if (!pages[page]) {
                     pages[page] = []
@@ -81,14 +142,52 @@ export default {
             })
             return pages
         }
+    },
+    created() {
+        axios.get(`${API_BASE_URL}/get_examples`, {
+            headers: { 'Content-Type': 'application/json' },
+            params: {},
+        })
+            .then((response) => {
+                this.examples = response.data;
+                // console.log(this.examples);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 }
 </script>
 
 <style>
-.el-dialog__wrapper.dialog-fade-leave-active,
+/* .el-dialog__wrapper.dialog-fade-leave-active,
 .el-message-box__wrapper.msgbox-fade-leave-active {
     transition: none;
 }
 
+.el-popup-parent--hidden {
+    transition: none;
+} */
+.el-card {
+    type: 'flex';
+    justify: 'center';
+}
+
+.image-container {
+    display: inline-block;
+}
+
+.example_image {
+    width: 100%;
+    /* height: 200px; */
+    height: 8rem;
+    object-fit: contain;
+    padding: 0 5px;
+}
+
+
+
+.el-card__body {
+    padding: 1rem;
+}
 </style>

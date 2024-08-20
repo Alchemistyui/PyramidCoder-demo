@@ -52,6 +52,30 @@ def get_examples():
         num -= 1
         if num == 0:
             break
+    
+    with open(os.path.join(data_path, nlvr2_anno),"r") as f:
+        anno = json.load(f)
+    num = 5
+    for x in anno.values():
+        item = {}
+        imgs = []
+        # import pdb; pdb.set_trace()
+        for y in x['image']:
+            with open(os.path.join(data_path, 'images/nlvr2', y), 'rb') as f:
+                img = f.read()
+            base64_img = base64.b64encode(img).decode('utf-8')
+            imgs.append(base64_img)
+        item['image'] = imgs
+        item['question'] = x['question']
+        item['queries'] = x['queries']
+        item['ja_question'] = x['ja_question']
+        item['ja_queries'] = x['ja_queries']
+        item['codes'] = x['codes']
+        response.append(item)
+        num -= 1
+        if num == 0:
+            break
+
     return jsonify(response)
 
 
