@@ -37,3 +37,9 @@ python server.py
 ```sh
 npm run build
 ```
+
+
+### Run with docker
+```sh
+docker-compose up --build
+```
