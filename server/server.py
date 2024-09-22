@@ -1,7 +1,7 @@
 '''
 Author: Alchemist
 Date: 2023-04-12
-LastEditTime: 2024-08-20
+LastEditTime: 2024-09-22
 FilePath: /PyramidCoder-demo/server/server.py
 Description: 
 
@@ -32,7 +32,7 @@ def get_examples():
     response = []
     with open(os.path.join(data_path, gqa_anno),"r") as f:
         anno = json.load(f)
-    num = 5
+    num = 6
     for x in anno.values():
         item = {}
         imgs = []
@@ -56,7 +56,7 @@ def get_examples():
     
     with open(os.path.join(data_path, nlvr2_anno),"r") as f:
         anno = json.load(f)
-    num = 5
+    num = 6
     for x in anno.values():
         item = {}
         imgs = []

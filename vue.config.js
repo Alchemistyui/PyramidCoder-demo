@@ -1,12 +1,13 @@
 /*
- * @Author: Alchemist
- * @Date: 2023-04-26
- * @LastEditTime: 2023-07-08
- * @FilePath: /RabiBear-Home-Web/vue.config.js
+ * @Author: Alchemistyui
+ * @Date: 2023-11-24
+ * @LastEditTime: 2024-09-22
+ * @FilePath: /PyramidCoder-demo/vue.config.js
  * @Description: 
  * 
- * Copyright (c) 2023, All Rights Reserved. 
+ * Copyright (c) 2024, All Rights Reserved. 
  */
+
 // module.exports = {
 //     devServer: {
 //       proxy: {

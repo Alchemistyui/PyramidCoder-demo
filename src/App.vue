@@ -22,8 +22,8 @@ import { RouterLink, RouterView } from 'vue-router';
           <RouterLink class="router_link" to="/demo" :isJan="isJan">Examples</RouterLink>
         </el-menu-item>
 
-        <el-menu-item index="2">
-          <el-button-group>
+        <el-menu-item index="2" >
+          <el-button-group class="lang_button">
             <el-button type="primary" @click="setIsJan(false)">Eng</el-button>
             <el-button type="primary" @click="setIsJan(true)">日</el-button>
           </el-button-group>
@@ -89,7 +89,7 @@ export default {
 
   .el-main {
     /* text-align: left; */
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin-top: 1rem;
     /* max-width: 500px; */
     width: 100%;
@@ -125,8 +125,13 @@ export default {
     border: 0;
   }
 
+  .router_link {
+    font-size: 1.5rem;
+  }
+
   .router_link:hover {
     background-color: transparent;
+    font-size: 1.5rem;
     /* background-color: red;  */
     /* padding: 5px 20px; */
   }
@@ -140,6 +145,13 @@ export default {
 
   .el-menu--horizontal>.logo_router.is-active {
     border-bottom: 1px solid #FFFFFB;
+  }
+  .lang_button {
+    position: fixed;
+    top: 2rem;
+    right: 5rem;
+    /* padding-top: 1rem;
+    padding-left: 63rem; */
   }
 }
 </style>

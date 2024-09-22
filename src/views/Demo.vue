@@ -1,7 +1,7 @@
 <!--
  * @Author: Alchemistyui
  * @Date: 2023-07-12
- * @LastEditTime: 2024-08-20
+ * @LastEditTime: 2024-09-22
  * @FilePath: /PyramidCoder-demo/src/views/Demo.vue
  * @Description: 
  * 
@@ -22,7 +22,7 @@
 
 
         <el-row v-for="(page, index) of pages" :key="index" type="flex" justify="center">
-            <el-col :span="6" v-for="(item, innerindex) of page" :key="item.projectId">
+            <el-col :span="8" v-for="(item, innerindex) of page" :key="item.projectId">
                 <el-card shadow="hover" class="example_card">
                     <div v-for="(image, imageIndex) in item.image" :key="imageIndex" class="image-container">
                         <img :src="'data:image/png;base64,' + image" class="example_image">
@@ -31,12 +31,12 @@
 
                         <p>{{ item.question }}</p>
                         <p>(日本語: {{ item.ja_question }})</p>
-                        <el-button @click="item.dialogVisible = true">Try this</el-button>
+                        <el-button @click="item.dialogVisible = true; this.questionTypingVisible = true">Try this</el-button>
                         <!-- <el-button type="text" @click="item.dialogVisible = true"><p>{{ item.question }}</p>
                             <br /><p>(日本語: {{ item.ja_question }})</p>
                         </el-button> -->
                     </div>
-                    <el-dialog title="PyramidCoder Generation" v-model="item.dialogVisible">
+                    <el-dialog title="PyramidCoder Generation" v-model="item.dialogVisible" :before-close="handleDialogClose">
                         <!-- <el-button type="text" @click="showDialog(item.projectId)"><span>{{ item.question }}</span></el-button>
                         
                         <el-dialog :title="'PyramidCoder Generation - ' + item.projectId" :visible.sync="dialogVisible[item.projectId]"> -->
@@ -55,7 +55,7 @@
 
                         <h2 v-if="isJan">Question Rephrasing</h2>
                         <h2 v-else>質問の言い換え</h2>
-                        <Typing :fullText="getRandomCode(item.queries)" :typingSpeed="50" :thinkingTime="1000"
+                        <Typing v-if="questionTypingVisible" :fullText="getRandomCode(item.queries)" :typingSpeed="50" :thinkingTime="1000"
                             @typing-complete="QuestionTypingComplete" />
                         <div v-if="showCodeDiv">
                             <h2 v-if="isJan">Code generation</h2>
@@ -107,6 +107,7 @@ export default {
             codeTypingVisible: false,
             showAnswerDiv: false,
             showAnswer: false,
+            questionTypingVisible: false,
             dialogVisible: {}
         };
     },
@@ -131,13 +132,21 @@ export default {
             setTimeout(() => {
                 this.showAnswer = true;
             }, 3000);
+        },
+        handleDialogClose(done) {
+            this.showCodeDiv = false;
+            this.codeTypingVisible = false;
+            this.showAnswerDiv = false;
+            this.showAnswer = false;
+            this.questionTypingVisible = false;
+            done();
         }
     },
     computed: {
         pages() {
             const pages = []
             this.examples.forEach((item, index) => {
-                const page = Math.floor(index / 4)//One line has four items
+                const page = Math.floor(index / 3)//One line has four items
                 if (!pages[page]) {
                     pages[page] = []
                 }

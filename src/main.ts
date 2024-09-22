@@ -1,12 +1,13 @@
 /*
  * @Author: Alchemistyui
- * @Date: 2023-01-29
- * @LastEditTime: 2023-04-27
- * @FilePath: /RabiBear-Home-Web/src/main.ts
+ * @Date: 2023-07-12
+ * @LastEditTime: 2024-09-22
+ * @FilePath: /PyramidCoder-demo/src/main.ts
  * @Description: 
  * 
- * Copyright (c) 2023, All Rights Reserved. 
+ * Copyright (c) 2024, All Rights Reserved. 
  */
+
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'

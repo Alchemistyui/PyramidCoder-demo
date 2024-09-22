@@ -1,21 +1,3 @@
-<!--
- * @Author: Alchemistyui
- * @Date: 2023-07-12
- * @LastEditTime: 2024-08-07
- * @FilePath: /PyramidCoder-demo/src/views/HomeView.vue
- * @Description: 
- * 
- * Copyright (c) 2023, All Rights Reserved. 
--->
-<!--
- * @Author: Alchemistyui
- * @Date: 2023-01-29
- * @LastEditTime: 2023-07-13
- * @FilePath: /RabiBear-Home-Web/src/views/HomeView.vue
- * @Description: 
- * 
- * Copyright (c) 2023, All Rights Reserved. 
--->
 
 <template>
 
@@ -61,7 +43,7 @@
       LLMのプロンプトとは、大規模言語モデル（LLM）に対して特定の応答を生成させるために入力する指示や質問のことです。プロンプトを使うことで、LLMは与えられた文脈に基づいてテキストを生成し、質問に答えたり、特定のタスクを実行したりすることができます。
     </p>
     <h3>問題点</h3>
-    <p>既存のPVQAモデルで使用されるプロンプトは簡単すぎます。
+    <p>既存のPVQAモデルで使用されるプロンプト(IO prompting)は簡単すぎます。
     <ul>
       <li>そのため、LLMからドメイン特有の知識を引き出せず、シンプルで類似したコードしか生成できません。</li>
       <li>また、生成されるコードが1つだけで、質問に対する複数の解決策をうまく活用できていません。</li>
@@ -70,7 +52,7 @@
 
     <h3>動機</h3>
     <p>より複雑な質問に対応するために、PVQAのプロンプトを改善し、多様な解決策の探索して複数のコードを生成することで、PVQAモデルの性能を向上させます。</p>
-    <!-- <img class="card_img" src="@/assets/imgs/home/motivation.png" style="width: 60%; margin: 0 auto;" /> -->
+    <img class="card_img" src="@/assets/imgs/home/motivation.png" style="width: 60%; margin: 0 auto;" />
   </div>
 
   <div class="motivation en" v-else>
@@ -88,7 +70,7 @@
 
     <h3>Motivation</h3>
     <p>To handle more complex questions, we aim to improve PVQA prompts and explore diverse solutions by generating multiple codes, thereby enhancing the performance of PVQA models.</p>
-    <!-- <img class="card_img" src="@/assets/imgs/home/motivation.png" style="width: 60%; margin: 0 auto;" /> -->
+    <img class="card_img" src="@/assets/imgs/home/motivation.png" style="width: 60%; margin: 0 auto;" />
   </div>
 
 

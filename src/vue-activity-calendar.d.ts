@@ -1,10 +1,11 @@
 /*
- * @Author: Alchemist
- * @Date: 2023-04-30
- * @LastEditTime: 2023-04-30
- * @FilePath: /RabiBear-Home-Web/src/vue-activity-calendar.d.ts
+ * @Author: Alchemistyui
+ * @Date: 2023-07-12
+ * @LastEditTime: 2024-09-22
+ * @FilePath: /PyramidCoder-demo/src/vue-activity-calendar.d.ts
  * @Description: 
  * 
- * Copyright (c) 2023, All Rights Reserved. 
+ * Copyright (c) 2024, All Rights Reserved. 
  */
+
 declare module 'vue-activity-calendar';
