@@ -1,9 +1,19 @@
-
 ## Pyramid Coder Demo
 
 This is a demo for paper "Pyramid Coder: Hierarchical Code Generator for Compositional Visual Question Answering".
 
+
+### Run with docker
+
+If you're using Docker, simply run the following command.
+
+```sh
+docker-compose up --build
+```
+
 ## Project Setup
+
+To build from scratch, follow these steps to set up.
 
 ```sh
 cd ./PyramidCoder-demo/
@@ -34,10 +44,4 @@ python server.py
 
 ```sh
 npm run build
-```
-
-### Run with docker
-
-```sh
-docker-compose up --build
 ```
