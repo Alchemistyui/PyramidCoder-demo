@@ -1,8 +1,8 @@
 <!--
  * @Author: Alchemistyui
  * @Date: 2023-07-12
- * @LastEditTime: 2024-09-22
- * @FilePath: /PyramidCoder-demo/src/views/Demo.vue
+ * @LastEditTime: 2024-10-24
+ * @FilePath: /PyramidCoder-demo-main/src/views/Demo.vue
  * @Description: 
  * 
  * Copyright (c) 2024, All Rights Reserved. 
@@ -10,16 +10,6 @@
 
 <template>
     <main class="card_view">
-        <!-- <el-button type="text" @click="dialogVisible = true">{{dialogVisible}}</el-button> -->
-
-        <!-- <el-dialog title="提示" v-model="dialogVisible" width="30%" :before-close="handleClose">
-            <span>这是一段信息</span>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-            </span>
-        </el-dialog> -->
-
 
         <el-row v-for="(page, index) of pages" :key="index" type="flex" justify="center">
             <el-col :span="8" v-for="(item, innerindex) of page" :key="item.projectId">
@@ -60,8 +50,8 @@
                         <div v-if="showCodeDiv">
                             <h2 v-if="isJan">Code generation</h2>
                             <h2 v-else>コード生成</h2>
-                            <Typing v-if="codeTypingVisible" :fullText="getRandomCode(item.codes)" :typingSpeed="100"
-                                :thinkingTime="3000" @typing-complete="CodeTypingComplete" />
+                            <Typing v-if="codeTypingVisible" :fullText="getRandomCode(item.codes)" :typingSpeed="80"
+                                :thinkingTime="3200" @typing-complete="CodeTypingComplete" />
                         </div>
                         <div v-if="showAnswerDiv">
                             <h2 v-if="isJan">Code execution</h2>
@@ -115,6 +105,7 @@ export default {
         getRandomCode(codes) {
             if (Array.isArray(codes) && codes.length > 0) {
                 const randomIndex = Math.floor(Math.random() * codes.length);
+                // console.log(codes[randomIndex]);
                 return codes[randomIndex];
             } else {
                 return ''; // Return an empty string or a default value if the list is empty

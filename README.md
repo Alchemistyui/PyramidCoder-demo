@@ -1,4 +1,3 @@
-This template should help get you started developing with Vue 3 in Vite.
 
 ## Pyramid Coder Demo
 
@@ -17,7 +16,6 @@ npm install
 npm install --save-dev @vitejs/plugin-vue
 npm install axios
 ```
-
 
 ### Compile and Hot-Reload for Development
 
@@ -38,8 +36,8 @@ python server.py
 npm run build
 ```
 
-
 ### Run with docker
+
 ```sh
 docker-compose up --build
 ```

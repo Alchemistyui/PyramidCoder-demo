@@ -1,0 +1,147 @@
+{
+    "38144": {
+        "question": "Is it true that one image shows stacked disk shapes garnished with green sprigs, and the other image features something creamy with broccoli florets in it?",
+        "program": "green_sprigs=False\nbroccoli=False\nfor image in images:\n    green_sprigs_i=query(image, \"Does this image show stacked disk shapes garnished with green sprigs?\") == \"yes\"\n    broccoli_i=False\n    if not green_sprigs_i:\n        broccoli_i=query(image, \"Does this image show something creamy with broccoli florets in it?\") == \"yes\"\n    green_sprigs=green_sprigs or green_sprigs_i\n    broccoli=broccoli or broccoli_i\nif green_sprigs and broccoli:\n    answer=\"yes\"\nelse:\n    answer=\"no\"",
+        "queries": "Does one image indeed display stacked disk shapes adorned with green sprigs, while the other image showcases something creamy containing broccoli florets?\nIs it accurate that one image exhibits stacked disk shapes embellished with green sprigs, and the other image highlights something creamy with broccoli florets?\nIs it correct that in one image, there are stacked disk shapes adorned with green sprigs, and in the other image, there is something creamy with broccoli florets?\nAre the contents of one image truly stacked disk shapes with green sprigs and the other image featuring something creamy with broccoli florets?",
+        "codes": [
+            "green_sprigs=False\nbroccoli=False\nfor image in images:\n    green_sprigs_i=query(image, \"Does this image show stacked disk shapes garnished with green sprigs?\") == \"yes\"\n    broccoli_i=False\n    if not green_sprigs_i:\n        broccoli_i=query(image, \"Does this image show something creamy with broccoli florets in it?\") == \"yes\"\n    green_sprigs=green_sprigs or green_sprigs_i\n    broccoli=broccoli or broccoli_i\nif green_sprigs and broccoli:\n    answer=\"yes\"\nelse:\n    answer=\"no\"",
+            "green_sprigs=False\nbroccoli=False\nfor image in images:\n    green_sprigs_boxes=get_object_boxes(image, \"stacked disk shapes garnished with green sprigs\")\n    if len(green_sprigs_boxes) > 0:\n        green_sprigs=True\n    else:\n        broccoli_boxes=get_object_boxes(image, \"something creamy with broccoli florets in it\")\n        if len(broccoli_boxes) > 0:\n            broccoli=True\nif green_sprigs and broccoli:\n    answer=\"yes\"\nelse:\n    answer=\"no\""
+        ],
+        "question_type": [
+            "global"
+        ],
+        "image": [
+            "21_train-5606-0-img0.png",
+            "21_train-5606-0-img1.png"
+        ],
+        "ja_question": "1 つの画像には緑の小枝が飾られた積み重ねられた円盤の形が示され、もう 1 つの画像にはブロッコリーの小花が入ったクリーミーなものが描かれているというのは本当ですか?",
+        "ja_queries": [
+            "1 つの画像には確かに緑の小枝で飾られた積み重ねられた円盤の形が表示され、もう 1 つの画像にはブロッコリーの小花が含まれたクリーム状のものが表示されているでしょうか?",
+            "1 つの画像は緑の小枝で飾られた積み重ねられた円盤の形を示し、もう 1 つの画像はブロッコリーの小花でクリーミーなものを強調表示しているというのは正確ですか?",
+            "1 つの画像には緑色の小枝で飾られた円盤状の積み重ねがあり、もう 1 つの画像にはブロッコリーの小花がついたクリーミーなものがあるということで正しいでしょうか?",
+            "1 つの画像の内容は本当に緑色の小枝が積み重なった円盤状で、もう 1 つの画像はブロッコリーの小花がついたクリーミーなものでしょうか?"
+        ],
+        "answer": "no"
+    },
+    "46789": {
+        "question": "Is it true that one interior image of a yurt shows a bedroom with one wide bed with a headboard and a trunk sitting at the end of the bed?",
+        "program": "answer=\"no\"\nfor image in images:\n    is_yurt=query(image, \"Is this an interior image of a yurt?\")\n    if is_yurt == \"yes\":\n        headboard=query(image, \"Does this image show one wide bed with a headboard?\")\n        trunk=query(image, \"Does this image show one wide bed with a trunk sitting at the end of it?\")\n        if headboard == \"yes\" and trunk == \"yes\":\n            answer=\"yes\"",
+        "queries": "Does one interior photo of a yurt indeed reveal a bedroom featuring a single spacious bed with a headboard and a trunk positioned at the foot of the bed?\nIs the assertion accurate that one inside image of a yurt exhibits a bedroom showcasing a single wide bed complete with a headboard and a trunk situated at the bed's end?\nCan it be validated that a yurt's internal photo depicts a bedroom with a single wide bed featuring a headboard and a trunk situated at the end of the bed?",
+        "codes": [
+            "answer=\"no\"\nfor image in images:\n    is_yurt=query(image, \"Is this an interior image of a yurt?\")\n    if is_yurt == \"yes\":\n        headboard=query(image, \"Does this image show one wide bed with a headboard?\")\n        trunk=query(image, \"Does this image show one wide bed with a trunk sitting at the end of it?\")\n        if headboard == \"yes\" and trunk == \"yes\":\n            answer=\"yes\"",
+            "answer=\"no\"\nfor image in images:\n    is_yurt=query(image, \"Is this an interior image of a yurt?\")\n    if is_yurt == \"yes\":\n        headboard_boxes=get_object_boxes(image, \"wide bed with a headboard\")\n        trunk_boxes=get_object_boxes(image, \"one wide bed with a trunk sitting at the end of it\")\n        if len(headboard_boxes) > 0 and len(trunk_boxes) > 0:\n            answer=\"yes\""
+        ],
+        "question_type": [
+            "attribute"
+        ],
+        "image": [
+            "93_train-6440-2-img0.png",
+            "93_train-6440-2-img1.png"
+        ],
+        "ja_question": "パオのインテリア画像の 1 つには、ヘッドボードが付いた幅の広いベッド 1 台とベッドの端にトランクが置かれている寝室が示されているというのは本当ですか?",
+        "ja_queries": [
+            "パオの内部写真の 1 枚には、ヘッドボードが付いた広々としたベッドが 1 台と、ベッドの足元にトランクが置かれている寝室が実際に写っているでしょうか?",
+            "パオの内部の画像の 1 つは、ヘッドボードとベッドの端にトランクを備えた幅の広いベッド 1 台を展示する寝室を示しているという主張は正確ですか?",
+            "パオの内部写真には、ヘッドボードとベッドの端にあるトランクを備えた幅広のベッドが 1 台ある寝室が描かれていると検証できますか?"
+        ],
+        "answer": "no"
+    },
+    "2110": {
+        "question": "Is it true that one image shows exactly three gorillas, including a baby?",
+        "program": "answer=\"no\"\nfor image in images:\n    three_gorillas=query(image, \"Does this image show exactly three gorillas?\")\n    baby=query(image, \"Does this image show a baby?\")\n    if three_gorillas == \"yes\" and baby == \"yes\":\n        answer=\"yes\"",
+        "queries": "Is it accurate that one image displays three gorillas, with one being a baby?\nCan it be confirmed that a baby gorilla is included in the image, which shows exactly three gorillas?\nIs the statement correct that there are three gorillas in the image, and one of them is a baby?\nDoes the image accurately represent three gorillas, with one of them being a baby?",
+        "codes": [
+            "answer=\"no\"\nfor image in images:\n    three_gorillas=query(image, \"Does this image show exactly three gorillas?\")\n    baby=query(image, \"Does this image show a baby?\")\n    if three_gorillas == \"yes\" and baby == \"yes\":\n        answer=\"yes\"",
+            "answer=\"no\"\nfor image in images:\n    gorillas_boxes=get_object_boxes(image, \"gorillas\")\n    baby_gorillas_boxes=get_object_boxes(image, \"baby gorillas\")\n    if len(gorillas_boxes) == 3 and len(baby_gorillas_boxes) > 0:\n        answer=\"yes\"",
+            "answer=\"no\"\nfor image in images:\n    gorillas_boxes=get_object_boxes(image, \"gorillas\")\n    baby_gorillas_exist=False\n    for gorillas_box in gorillas_boxes:\n        gorillas_patch=crop(image, gorillas_box, type=\"object\")\n        if query(gorillas_patch, \"Is this a gorillas baby?\").lower() == \"yes\":\n            baby_gorillas_exist=\"yes\"\n            break\n    if len(gorillas_boxes) == 3 and baby_gorillas_exist == \"yes\":\n        answer=\"yes\""
+        ],
+        "question_type": [
+            "count"
+        ],
+        "image": [
+            "12_train-5988-2-img0.png",
+            "12_train-5988-2-img1.png"
+        ],
+        "ja_question": "1 枚の画像に赤ちゃんを含むちょうど 3 頭のゴリラが写っているというのは本当ですか?",
+        "ja_queries": [
+            "1 つの画像に 3 頭のゴリラが表示され、そのうちの 1 頭が赤ちゃんであるというのは正確ですか?",
+            "ちょうど 3 匹のゴリラが写っている画像に赤ちゃんゴリラが含まれていることが確認できますか?",
+            "画像には 3 頭のゴリラがいて、そのうちの 1 頭は赤ちゃんであるという記述は正しいですか?",
+            "この画像は 3 頭のゴリラを正確に表現しており、そのうちの 1 頭は赤ちゃんですか?"
+        ],
+        "answer": "yes"
+    },
+    "16345": {
+        "question": "Is it true that two striped cats are nursing on a dog in one of the images?",
+        "program": "answer=\"no\"\nfor image in images:\n    two_cats_nursing_on_a_dog=query(image, \"Are there two cats nursing on a dog?\")\n    striped_cats=query(image, \"Are the cats striped?\")\n    if two_cats_nursing_on_a_dog == \"yes\" and striped_cats == \"yes\":\n        answer=\"yes\"",
+        "queries": "Are there two cats with stripes nursing on a dog in any of the pictures?\nIn one of the images, is it accurate that two cats with stripes are nursing on a dog?\nDoes one of the images show two cats with stripes nursing on a dog?\nIs the statement true that there are two striped cats nursing on a dog in one of the pictures?",
+        "codes": [
+            "answer=\"no\"\nfor image in images:\n    two_cats_nursing_on_a_dog=query(image, \"Are there two cats nursing on a dog?\")\n    striped_cats=query(image, \"Are the cats striped?\")\n    if two_cats_nursing_on_a_dog == \"yes\" and striped_cats == \"yes\":\n        answer=\"yes\"",
+            "answer=\"no\"\nfor image in images:\n    two_striped_cats=query(image, \"Are there two striped cats?\")\n    if two_striped_cats.lower() == \"yes\":\n        answer=query(image, \"Are the two striped cats nursing on a dog?\")"
+        ],
+        "question_type": [
+            "count"
+        ],
+        "image": [
+            "92_train-8885-3-img0.png",
+            "92_train-8885-3-img1.png"
+        ],
+        "ja_question": "画像の 1 つに 2 匹の縞模様の猫が犬を授乳しているというのは本当ですか?",
+        "ja_queries": [
+            "写真の中に、縞模様の猫が 2 匹いて犬を授乳していますか?",
+            "画像の 1 つでは、縞模様の 2 匹の猫が犬を授乳しているというのは正確ですか?",
+            "画像の 1 つは、縞模様の 2 匹の猫が犬を授乳している様子を示していますか?",
+            "写真の 1 枚に 2 匹の縞模様の猫が犬を授乳しているという記述は本当ですか?"
+        ],
+        "answer": "yes"
+    },
+    "19536": {
+        "question": "Is it true that right image shows a bakery with pale green display cases and black track lighting suspended from a wood plank ceiling?",
+        "program": "bakery=query(images[1], \"Does this image show a bakery?\") == \"yes\"\ndisplay_cases=query(images[1], \"Does this image show pale green display cases?\") == \"yes\"\nblack_track_lighting=query(images[1], \"Does this image show black track lighting?\") == \"yes\"\nwood_plank_ceiling=query(images[1], \"Does this image show a wood plank ceiling?\") == \"yes\"\nif bakery and display_cases and black_track_lighting and wood_plank_ceiling:\n    answer=\"yes\"\nelse:\n    answer=\"no\"",
+        "queries": "Does the image on the right accurately depict a bakery featuring pale green display cases and black track lighting hanging from a wooden plank ceiling?\nCan it be confirmed that the image on the right displays a bakery with pale green display cases and black track lighting suspended from a wooden plank ceiling?\nDoes the right-side image accurately portray a bakery showcasing pale green display cases and black track lighting suspended from a wooden plank ceiling?",
+        "codes": [
+            "answer=\"no\"\nimage=images[1]\nbakery=query(image, \"Does this image show a bakery?\") == \"yes\"\ndisplay_cases=query(image, \"Does this image show pale green display cases?\") == \"yes\"\nblack_track_lighting=query(image, \"Does this image show black track lighting?\") == \"yes\"\nwood_plank_ceiling=query(image, \"Does this image show a wood plank ceiling?\") == \"yes\"\nif bakery and display_cases and black_track_lighting and wood_plank_ceiling:\n    answer=\"yes\"\nelse:\n    answer=\"no\"",
+            "answer=\"no\"\nimage=images[1]\nbakery=query(image, \"Does this image show a bakery?\") == \"yes\"\ndisplay_cases_boxes=get_object_boxes(image, \"pale green display cases\")\nblack_track_lighting_boxes=get_object_boxes(image, \"black track lighting\")\nwood_plank_ceiling_boxes=get_object_boxes(image, \"wood plank ceiling\")\nif bakery and len(display_cases_boxes) > 0 and len(black_track_lighting_boxes) > 0 and len(wood_plank_ceiling_boxes) > 0:\n    answer=\"yes\"",
+            "answer=\"no\"\nimage=images[1]\nbakery=query(image, \"Does this image show a bakery?\") == \"yes\"\nif bakery:\n    display_cases_boxes=get_object_boxes(image, \"pale green display cases\")\n    black_track_lighting_boxes=get_object_boxes(image, \"black track lighting suspended from a wood plank ceiling\")\n    if len(display_cases_boxes) > 0 and len(black_track_lighting_boxes) > 0:\n        answer=\"yes\""
+        ],
+        "question_type": [
+            "attribute"
+        ],
+        "image": [
+            "95_train-11048-1-img0.png",
+            "95_train-11048-1-img1.png"
+        ],
+        "ja_question": "右の画像は、薄緑色のショーケースと木の板の天井から吊り下げられた黒いトラック照明を備えたパン屋を示しているというのは本当ですか?",
+        "ja_queries": [
+            "右の画像は、淡い緑色のショーケースと木の板の天井から吊り下げられた黒いトラック照明を備えたパン屋を正確に描写していますか?",
+            "右側の画像には、薄緑色のショーケースと木の板の天井から吊り下げられた黒いトラック照明を備えたパン屋が表示されていることが確認できますか?",
+            "右側の画像は、淡い緑色のショーケースと木の板の天井から吊り下げられた黒いトラック照明を展示しているパン屋を正確に描写していますか?"
+        ],
+        "answer": "yes"
+    },
+    "68898": {
+        "question": "Is it true that one of the pelicans is opening its mouth wide?",
+        "program": "answer=\"no\"\nfor image in images:\n    pelican_exists=query(image, \"Is there a pelican?\")\n    if pelican_exists == \"yes\":\n        open_mouthed=query(image, \"Is there a pelican with its mouth open?\")\n        if open_mouthed == \"yes\":\n            answer=\"yes\"",
+        "queries": "Can it be confirmed whether one of the pelicans is opening its mouth widely?\nIs it accurate to say that a pelican is indeed opening its mouth wide?\nCould it be verified that one of the pelicans has its mouth wide open?\nCan we confirm the accuracy of the claim that a pelican is stretching its mouth wide?",
+        "codes": [
+            "answer=\"no\"\nfor image in images:\n    pelican_exists=query(image, \"Is there a pelican?\")\n    if pelican_exists == \"yes\":\n        open_mouthed=query(image, \"Is there a pelican with its mouth open?\")\n        if open_mouthed == \"yes\":\n            answer=\"yes\"",
+            "answer=\"no\"\nfor image in images:\n    pelican_boxes=get_object_boxes(image, \"pelican\")\n    if len(pelican_boxes) > 0:\n        for pelican_box in pelican_boxes:\n            pelican_patch=crop(image, pelican_box, type=\"object\")\n            if query(pelican_patch, \"Is this a pelican with its mouth open?\").lower() == \"yes\":\n                answer=\"yes\"\n                break",
+            "answer=\"no\"\nfor image in images:\n    pelican_boxes=get_object_boxes(image, \"pelican opening its mouth wide\")\n    if len(pelican_boxes) > 0:\n        answer=\"yes\""
+        ],
+        "question_type": [
+            "attribute"
+        ],
+        "image": [
+            "44_train-13162-0-img0.png",
+            "44_train-13162-0-img1.png"
+        ],
+        "ja_question": "ペリカンの一羽が大きく口を開けているというのは本当ですか？",
+        "ja_queries": [
+            "ペリカンが大きく口を開けているか確認できますか？",
+            "ペリカンが確かに口を大きく開けていると言うのは正確でしょうか?",
+            "ペリカンの一羽が大きく口を開けているのが確認できたでしょうか?",
+            "ペリカンが口を大きく広げているという主張の正確性を確認できますか?"
+        ],
+        "answer": "no"
+    }
+}

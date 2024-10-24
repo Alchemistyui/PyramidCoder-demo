@@ -1,7 +1,7 @@
 <template>
     <div class="typing-container">
       <p class="typing-text">
-        <span v-for="(char, index) in displayedText" :key="index">{{ char }}</span>
+        <span v-for="(char, index) in displayedText" :key="index" class="sentence">{{ char }}</span>
         <span v-if="showCursor" class="cursor">|</span>
       </p>
     </div>
@@ -93,5 +93,10 @@
       opacity: 0;
     }
   }
+
+.sentence {
+    white-space: pre-wrap;
+  }
+
   </style>
   
