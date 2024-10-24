@@ -1,0 +1,124 @@
+{
+    "14199179": {
+        "program": "answer=query(img, \"Which type of clothing is not white?\")",
+        "question": "Which type of clothing is not white?",
+        "queries": "What is the non-white clothing in the image?\nThe non-white clothing, what is its type?\nWhat kind of clothes are not the color white?\nWhich clothes do not look white in color?",
+        "codes": [
+            "clothing_boxes=get_object_boxes(img, \"clothing\")\nanswer_list=[]\nfor clothing_box in clothing_boxes:\n    clothing_patch=crop(img, clothing_box, type=\"object\")\n    is_white=query(clothing_patch, \"Is there clothing white in color?\")\n    if is_white.lower() != \"yes\":\n        answer_list.append(query(clothing_patch, \"Which type of clothing is it?\"))\nif answer_list != []:\n    answer=max(answer_list,key=answer_list.count)\nelse:\n    answer=\"no\"",
+            "clothing_boxes=get_object_boxes(img, \"clothing\")\nanswer_list=[]\nfor clothing_box in clothing_boxes:\n    clothing_patch=crop(img, clothing_box, type=\"object\")\n    not_white=query(clothing_patch, \"Is there clothing that is not white in color?\")\n    if not_white.lower() == \"yes\":\n        answer_list.append(query(clothing_patch, \"What's the type of the not white clothing?\"))\nif answer_list != []:\n    answer=max(answer_list,key=answer_list.count)\nelse:\n    answer=\"no\"",
+            "answer=query(img, \"Which type of clothing is not white?\")"
+        ],
+        "image": [
+            "2383860.jpg"
+        ],
+        "ja_question": "白くない服はどれですか?",
+        "ja_queries": [
+            "画像の白以外の服は何ですか？",
+            "白色以外の服は何ですか？",
+            "色が白ではない服は何ですか？",
+            "色が白く見えない服はどれですか?"
+        ],
+        "answer": "suit"
+    },
+    "10956934": {
+        "program": "answer=query(img, \"What animal is in front of the tree?\")",
+        "question": "What animal is in front of the tree?",
+        "queries": "What is the animal that locates before the tree?\nWhat kind of animal appears in front of the tree?\nIn front of the tree, what animal is it?",
+        "codes": [
+            "tree_boxes=get_object_boxes(img, \"tree\")\nanswer_list=[]\nfor tree_box in tree_boxes:\n    tree_patch=crop(img, tree_box, type=\"front\")\n    animal_exist=query(tree_patch, \"Is there an animal in front of the tree\")\n    if animal_exist.lower()==\"yes\":\n        answer_list.append(query(tree_patch, \"What kind of animal is in front of the tree?\"))\nif answer_list != []:\n    answer=max(answer_list,key=answer_list.count)\nelse:\n    answer=\"no\"",
+            "answer=query(img, \"What animal is in front of the tree?\")",
+            "animal_boxes=get_object_boxes(img, \"animal\")\nanswer_list=[]\nfor animal_box in animal_boxes:\n    animal_patch=crop(img, animal_box, type=\"front\")\n    tree_exist=query(animal_patch, \"Is there a tree behind the animal?\")\n    if tree_exist.lower() == \"yes\":\n        answer_list.append(query(animal_patch, \"What type of animal is it?\"))\nif answer_list != []:\n    answer=max(answer_list,key=answer_list.count)\nelse:\n    answer=\"no\""
+        ],
+        "image": [
+            "2388561.jpg"
+        ],
+        "ja_question": "木の前にいる動物は何ですか?",
+        "ja_queries": [
+            "木の手前にいる動物は何ですか?",
+            "木の前に現れる動物は何ですか?",
+            "木の前にいるのは何の動物ですか？"
+        ],
+        "answer": "panda"
+    },
+    "2763807": {
+        "program": "fan_color=query(img, \"What color is the fan?\")\nanswer=query(img, \"What type of appliance is \"+fan_color)",
+        "question": "What type of appliance has the same color as the fan?",
+        "queries": "What type is the device that matches the fan's color?\nWhat is the appliance in the image whose color is the same as the fan?\nThe appliance matches the color of the fan, what is its type?\nWhat appliance shares its color with the fan in the picture?",
+        "codes": [
+            "fan_color=query(img, \"What color is the fan?\")\nanswer=query(img, f\"What type of appliance is {fan_color}?\")",
+            "fan_color=query(img, \"What color is the fan?\")\nappliance_boxes=get_object_boxes(img, \"appliance\")\nanswer_list=[]\nfor appliance_box in appliance_boxes:\n    appliance_patch=crop(img, appliance_box, type=\"object\")\n    appliance_color=query(appliance_patch, \"What color is the appliance?\")\n    if appliance_color.lower() == fan_color.lower():\n        answer_list.append(query(appliance_patch, \"What type of appliance is it?\"))\nif answer_list != []:\n    answer=max(answer_list,key=answer_list.count)\nelse:\n    answer=\"no\"",
+            "fan_color=query(img, \"What is the color of the fan?\")\nappliance_boxes=get_object_boxes(img, \"appliance\")\nanswer_list=[]\nfor appliance_box in appliance_boxes:\n    appliance_patch=crop(img, appliance_box, type=\"object\")\n    appliance_color=query(appliance_patch, f\"Is the color of this appliance {fan_color}?\")\n    if appliance_color.lower() == \"yes\":\n        answer_list.append(query(appliance_patch, \"What type of appliance is it?\"))\nif answer_list != []:\n    answer=max(answer_list,key=answer_list.count)\nelse:\n    answer=\"no\""
+        ],
+        "image": [
+            "2383773.jpg"
+        ],
+        "ja_question": "扇風機と同じ色の家電製品は何ですか?",
+        "ja_queries": [
+            "ファンの色に合った機種は何ですか？",
+            "画像の扇風機と同じ色の器具は何ですか?",
+            "アプライアンスはファンの色と一致しますが、その種類は何ですか?",
+            "写真のファンと同じ色をしている家電製品は何ですか?"
+        ],
+        "answer": "air conditioner"
+    },
+    "10419734": {
+        "program": "girl_pos_x, girl_pos_y=get_pos(img, \"girl\")\nwhite_chair_pos_x, white_chair_pos_y=get_pos(img, \"white chair\")\nif white_chair_pos_x < girl_pos_x:\n    answer=\"left\"\nelse:\n    answer=\"right\"",
+        "question": "Is the white chair to the right or to the left of the girl that is wearing a shirt?",
+        "queries": "Which side of the girl wearing a shirt is the white chair located on, right or left?\nIs the white chair on the right or left side of the girl in the shirt?\nIn relation to the girl in the shirt, is the white chair on her right or left?",
+        "codes": [
+            "girl_boxes=get_object_boxes(img, \"girl wearing a shirt\")\nwhite_chair_boxes=get_object_boxes(img, \"white chair\")\nanswer_list=[]\nfor white_chair_box in white_chair_boxes:\n    for girl_box in girl_boxes:\n        if white_chair_box[0] < girl_box[0]:\n            answer_list.append(\"left\")\n        else:\n            answer_list.append(\"right\")\nif answer_list != []:\n    answer=max(answer_list,key=answer_list.count)\nelse:\n    answer=\"no\"",
+            "girl_boxes=get_object_boxes(img, \"girl wearing a shirt\")\nanswer_list=[]\nfor girl_box in girl_boxes:\n    girl_left_patch=crop(img, girl_box, type=\"left\")\n    chair_exist=query(girl_left_patch, \"Is there a white chair?\")\n    if chair_exist.lower() == \"yes\":\n        answer_list.append(\"left\")\n    else:\n        answer_list.append(\"right\")\nif answer_list != []:\n    answer=max(answer_list,key=answer_list.count)\nelse:\n    answer=\"no\"",
+            "answer=query(img, \"Is the white chair to the right or to the left of the girl that is wearing a shirt?\")"
+        ],
+        "image": [
+            "2398674.jpg"
+        ],
+        "ja_question": "白い椅子はシャツを着ている女の子の右にありますか、それとも左にありますか?",
+        "ja_queries": [
+            "白い椅子はシャツを着た女の子の右と左どちら側にありますか?",
+            "白い椅子はシャツを着た女の子の右側にありますか、それとも左側にありますか?",
+            "シャツを着た女の子に関して、白い椅子は右にありますか、左にありますか?"
+        ],
+        "answer": "right"
+    },
+    "15594542": {
+        "program": "bag_exists=query(img, \"Is there a bag?\")\nanswer=\"no\"\nif bag_exists == \"yes\":\n    garbage_bin_pos_x, garbage_bin_pos_y=get_pos(img, \"garbage bin\")\n    bag_pos_x, bag_pos_y=get_pos(img, \"bag\")\n    if garbage_bin_pos_x > bag_pos_x:\n        answer=\"yes\"",
+        "question": "Is the garbage bin to the right of a bag?",
+        "queries": "The garbage bin is on the right side of a bag, is it correct?\nTo the right of a bag, is there a garbage bin?\nIs there a garbage bin positioned to the right of a bag?",
+        "codes": [
+            "garbage_bin_boxes=get_object_boxes(img, \"garbage bin\")\nbag_boxes=get_object_boxes(img, \"bag\")\nanswer_list=[]\nfor garbage_bin_box in garbage_bin_boxes:\n    for bag_box in bag_boxes:\n        if bag_box[0] < garbage_bin_box[0]:\n            answer_list.append(\"yes\")\n        else:\n            answer_list.append(\"no\")\nif answer_list != []:\n    answer=max(answer_list,key=answer_list.count)\nelse:\n    answer=\"no\"",
+            "answer=query(img, \"Is the garbage bin to the right of a bag?\")",
+            "answer=\"no\"\nbag_boxes=get_object_boxes(img, \"bag\")\nfor bag_box in bag_boxes:\n    bag_right_patch=crop(img, bag_box, type=\"right\")\n    garbage_bin_exist=query(bag_right_patch, \"Is there a garbage bin?\")\n    if garbage_bin_exist.lower() == \"yes\":\n        answer=\"yes\"\n        break"
+        ],
+        "image": [
+            "2388680.jpg"
+        ],
+        "ja_question": "ゴミ箱はカバンの右側にありますか？",
+        "ja_queries": [
+            "ゴミ箱は袋の右側にありますよね？",
+            "カバンの右側にゴミ箱はありますか？",
+            "ゴミ箱は袋の右側にありますか?"
+        ],
+        "answer": "no"
+    },
+    "12797924": {
+        "program": "answer=query(img, \"What is the name of the pink article of clothing?\")",
+        "question": "What is the name of the pink article of clothing?",
+        "queries": "What's the pink clothing item called?\nWhat is the pink attire's name?\nWhat's the name of the clothing item that's pink?",
+        "codes": [
+            "answer=query(img, \"What is the name of the pink article of clothing?\")",
+            "pink_clothing_boxes=get_object_boxes(img, \"pink clothing\")\nanswer_list=[]\nfor pink_clothing_box in pink_clothing_boxes:\n    pink_clothing_patch=crop(img, pink_clothing_box, type=\"object\")\n    answer_list.append(query(pink_clothing_patch, \"What is the name of the pink clothing?\"))\nif answer_list != []:\n    answer=max(answer_list,key=answer_list.count)\nelse:\n    answer=\"no\"",
+            "clothing_boxes=get_object_boxes(img, \"clothing\")\nanswer_list=[]\nfor clothing_box in clothing_boxes:\n    clothing_patch=crop(img, clothing_box, type=\"object\")\n    pink=query(clothing_patch, \"Is the clothing pink?\")\n    if pink.lower() == \"yes\":\n        answer_list.append(query(clothing_patch, \"What is the name of the clothing?\"))\nif answer_list != []:\n    answer=max(answer_list,key=answer_list.count)\nelse:\n    answer=\"no\""
+        ],
+        "image": [
+            "2368594.jpg"
+        ],
+        "ja_question": "ピンクの服の名前は何ですか?",
+        "ja_queries": [
+            "ピンクの服は何という名前ですか?",
+            "ピンクの服の名前は何ですか？",
+            "ピンクの服の名前は何ですか?"
+        ],
+        "answer": "shirt"
+    }
+}
