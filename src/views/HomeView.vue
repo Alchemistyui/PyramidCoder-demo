@@ -82,7 +82,7 @@
       <li style="color: #0E70BC;">複数のコードを生成し、質問に関連する潜在的な解決策を最大限に活用します。</li>
       <li style="color: #F5BB39;">最終的な答えはコードを実行した後の答えの頻度と、答えと質問の意味的な一貫性に基づいてを選択されます。</li>
     </ol>
-    <!-- <img class="card_img" src="@/assets/imgs/home/pvqa_model.gif" style="width: 60%; margin: 0 auto;" /> -->
+    <img class="card_img" src="@/assets/imgs/home/pyramidcoder_gif.gif" style="width: 70%; margin: 0 auto;" />
     </p>
   </div>
 
@@ -94,7 +94,7 @@
       <li style="color: #0E70BC;">Generate multiple codes to maximize the potential solutions related to the question.</li>
       <li style="color: #F5BB39;">The final answer is selected based on the frequency of answers and the semantic consistency between the answers and the question after executing the codes.</li>
     </ol>
-    <!-- <img class="card_img" src="@/assets/imgs/home/pvqa_model.gif" style="width: 60%; margin: 0 auto;" /> -->
+    <img class="card_img" src="@/assets/imgs/home/pyramidcoder_gif.gif" style="width: 70%; margin: 0 auto;" />
     </p>
   </div>
 
