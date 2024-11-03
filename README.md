@@ -2,13 +2,12 @@
 
 This is a demo for paper "Pyramid Coder: Hierarchical Code Generator for Compositional Visual Question Answering".
 
-
 ### Run with docker
 
 If you're using Docker, simply run the following command.
 
 ```sh
-docker-compose up --build
+docker compose up --build
 ```
 
 ## Project Setup
