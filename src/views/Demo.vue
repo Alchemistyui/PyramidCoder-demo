@@ -45,12 +45,12 @@
 
                         <h2 v-if="isJan">Question Rephrasing</h2>
                         <h2 v-else>質問の言い換え</h2>
-                        <Typing v-if="questionTypingVisible" :fullText="getRandomCode(item.queries)" :typingSpeed="50" :thinkingTime="1000"
+                        <Typing v-if="questionTypingVisible" :fullText="getRandomCode(item.queries)" :typingSpeed="30" :thinkingTime="1000"
                             @typing-complete="QuestionTypingComplete" />
                         <div v-if="showCodeDiv">
                             <h2 v-if="isJan">Code generation</h2>
                             <h2 v-else>コード生成</h2>
-                            <Typing v-if="codeTypingVisible" :fullText="getRandomCode(item.codes)" :typingSpeed="80"
+                            <Typing v-if="codeTypingVisible" :fullText="getRandomCode(item.codes)" :typingSpeed="30"
                                 :thinkingTime="3200" @typing-complete="CodeTypingComplete" />
                         </div>
                         <div v-if="showAnswerDiv">

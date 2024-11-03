@@ -27,6 +27,6 @@ coverage
 *.sln
 *.sw?
 
-
+server/nohup.out
 
 
